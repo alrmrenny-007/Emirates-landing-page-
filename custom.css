@@ -1,0 +1,168 @@
+body {
+        font-family: "Inter", sans-serif;
+      }
+      .hero-video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+      .glass-nav {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+      }
+      .section-fade {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+      .section-fade.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      }
+      .btn-primary {
+        background: #c60c30;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background: #9e0a26;
+        transform: translateY(-2px);
+      }
+      .btn-secondary {
+        background: transparent;
+        border: 2px solid #c60c30;
+        color: #c60c30;
+        transition: all 0.3s ease;
+      }
+      .btn-secondary:hover {
+        background: #c60c30;
+        color: white;
+      }
+      .gradient-overlay {
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(0, 0, 0, 0.2) 50%,
+          transparent 100%
+        );
+      }
+      .tier-card {
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+      .fleet-card {
+        position: relative;
+        overflow: hidden;
+      }
+      .fleet-card img {
+        transition: transform 0.6s ease;
+      }
+      .fleet-card:hover img {
+        transform: scale(1.05);
+      }
+      .scroll-indicator {
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+      .route-line {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: drawLine 3s ease-out forwards;
+      }
+      @keyframes drawLine {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .counter {
+        font-variant-numeric: tabular-nums;
+      }
+      :root {
+        --ink: #0f1115;
+        --red: #c8102e;
+        --gold: #b08d57;
+      }
+      .font-display {
+        font-family: "Fraunces", serif;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--red);
+      }
+      .eyebrow::before {
+        content: "";
+        width: 1.5rem;
+        height: 1px;
+        background: currentColor;
+        opacity: 0.55;
+      }
+      .eyebrow-light {
+        color: #f2a3ac;
+      }
+      .ticket-card {
+        position: relative;
+        border-radius: 0.75rem;
+      }
+      .ticket-card::after {
+        content: "";
+        position: absolute;
+        top: 0.75rem;
+        bottom: 0.75rem;
+        right: 0;
+        width: 1px;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.3) 0,
+          rgba(255, 255, 255, 0.3) 5px,
+          transparent 5px,
+          transparent 10px
+        );
+      }
+      @keyframes heroReveal {
+        from {
+          opacity: 0;
+          transform: translateY(22px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-reveal > * {
+        opacity: 0;
+        animation: heroReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .hero-reveal > *:nth-child(1) { animation-delay: 0.05s; }
+      .hero-reveal > *:nth-child(2) { animation-delay: 0.16s; }
+      .hero-reveal > *:nth-child(3) { animation-delay: 0.27s; }
+      .hero-reveal > *:nth-child(4) { animation-delay: 0.38s; }
+      .hero-reveal > *:nth-child(5) { animation-delay: 0.49s; }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-reveal > * {
+          animation: none;
+          opacity: 1;
+        }
+      }
