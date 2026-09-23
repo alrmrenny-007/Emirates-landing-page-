@@ -1,72 +1,82 @@
-# Emirates landing page — offline/self-hosted build
+# Emirates — Fly Better (Frontend Concept)
 
-This turns `emirates-landing.html` (which pulls Tailwind, React, Babel, Lucide,
-and fonts from CDNs) into a fully self-hosted bundle you can open with **no
-internet connection**.
+A multi-page airline site built as a frontend practice/portfolio piece. No
+frameworks, no build step — semantic HTML, hand-written CSS, and vanilla
+JavaScript, with a shared stylesheet and script across pages.
 
-I couldn't run these steps myself — my sandbox has no internet access to
-download npm packages — so this is set up for you to run on your own machine.
+> **Note:** This is an unofficial concept recreation for demonstration
+> purposes. It is not affiliated with or endorsed by Emirates, and none of
+> the fares, offers, flight times, or reviews shown are real.
 
-## What's here
+## Live preview
 
-```
-build-kit/
-├── package.json
-├── tailwind.config.js
-├── src/
-│   ├── input.css     ← Tailwind entry point (imports custom.css)
-│   ├── custom.css    ← your hand-written styles, extracted from the HTML
-│   └── app.jsx       ← the React app, extracted from the HTML
-└── dist/
-    └── index.html    ← the offline-ready shell (references local files)
+Serve the folder with any static file server (relative links between pages
+need `http://`, not `file://`):
+
+```bash
+npx serve .
+# or
+python3 -m http.server 8000
 ```
 
-## Steps (requires Node.js + internet, one time only)
+Then open `index.html`.
 
-1. **Install dependencies**
-   ```
-   cd build-kit
-   npm install
-   ```
+## Pages
 
-2. **Build the CSS and JS**
-   ```
-   npm run build
-   ```
-   This runs Tailwind's CLI (which scans `src/app.jsx` and generates only the
-   utility classes actually used, minified — much smaller and faster than the
-   CDN's in-browser JIT compiler) and Babel (which precompiles the JSX to
-   plain JavaScript once, instead of every page load).
+- **`index.html`** — the landing page: hero, interactive flight search
+  widget, cabins, fleet, destinations (with working region filters), fares,
+  Skywards tiers, testimonials, and an FAQ accordion.
+- **`destinations/detail.html?city=<slug>`** — a single data-driven template
+  that renders any of six cities (`london`, `sydney`, `new-york`, `paris`,
+  `singapore`, `rome`) from `assets/destinations-data.js`: hero, route facts,
+  overview, per-class fares, a sample flight schedule, and related
+  destinations. Destination cards on the homepage link here.
+- **`booking.html`** — a 3-step booking flow: choose an outbound/return
+  flight, enter passenger details, then review and confirm. Reads
+  `from`/`to`/`trip`/`depart`/`ret`/`adults`/`children`/`cabin` from the URL
+  so it can be pre-filled from the homepage search or a destination page's
+  fare cards. Confirming generates a mock PNR code — there's no backend and
+  no payment step by design.
 
-3. **Vendor React, ReactDOM, and Lucide locally**
-   ```
-   mkdir -p dist/vendor
-   cp node_modules/react/umd/react.production.min.js dist/vendor/
-   cp node_modules/react-dom/umd/react-dom.production.min.js dist/vendor/
-   ```
-   For Lucide, download `lucide.min.js` from https://unpkg.com/lucide@latest
-   once and save it to `dist/vendor/lucide.min.js`.
+## Project structure
 
-4. **Self-host the fonts (optional but recommended for true offline use)**
-   Download the Inter and Fraunces `.woff2` files (e.g. via
-   [google-webfonts-helper](https://gwfh.mranftl.com/fonts)) into
-   `dist/fonts/`, add an `@font-face` CSS file, and link it from
-   `dist/index.html` in place of the Google Fonts `<link>`.
+```
+.
+├── index.html
+├── booking.html
+├── destinations/
+│   └── detail.html
+├── assets/
+│   ├── styles.css              # shared design system for every page
+│   ├── main.js                 # shared, guarded behavior (nav, search, etc.)
+│   ├── destinations-data.js    # city data used by detail.html + booking prefill
+│   └── og-image.png            # 1200×630 social preview card
+└── README.md
+```
 
-5. **Handle the hero video and photos**
-   These are hosted on Cloudinary/Unsplash CDNs. Download them once and
-   reference local paths (e.g. `./assets/hero.mp4`, `./assets/dubai.jpg`) if
-   you want the page to work with zero network requests at all.
+## Tech notes
 
-6. Open `dist/index.html` directly in a browser — no server or internet
-   required once steps 3–5 are done.
+- `assets/main.js` guards every block it runs (`if (el) {...}`), so the same
+  file works safely across pages that don't have a given widget — e.g.
+  booking.html has no destination filter chips, and that block just no-ops.
+- No external JS libraries or icon fonts — icons are inline SVG.
+- Fonts (Inter, Fraunces) load from Google Fonts; everything else is
+  self-contained.
+- Photography is hotlinked from Unsplash — swap for your own optimized,
+  self-hosted assets before using this beyond a demo.
+- SEO basics are wired up on the homepage: meta description, canonical tag,
+  Open Graph / Twitter card tags pointing at `assets/og-image.png`, and a
+  JSON-LD `WebSite` block. Update the placeholder `example.com` URLs once
+  this has a real domain, and consider adding the same tags to the other
+  pages if they'll be shared directly.
 
-## Why this matters
+## Ideas for next steps
 
-- The Tailwind CDN script (`cdn.tailwindcss.com`) recompiles all utility CSS
-  in the browser on every load — Tailwind's own docs say it's not meant for
-  production use.
-- Babel Standalone re-parses and transpiles the entire ~700-line JSX file on
-  every page load, which is slow and blocks rendering.
-- Precompiling both ahead of time (steps 2–3) removes both of those runtime
-  costs and lets the page work fully offline.
+- Add a `sitemap.xml` and per-page canonical/OG tags now that there's more
+  than one page.
+- Replace hotlinked Unsplash images with optimized, self-hosted assets
+  (responsive `srcset`, WebP/AVIF).
+- Persist booking-flow state (e.g. `sessionStorage`) so a page refresh
+  mid-flow doesn't lose progress.
+- Wire the search and booking flow up to a real fares API if this becomes
+  more than a demo.

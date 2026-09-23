@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0f1115" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' stroke='%23C60C30' stroke-width='6' fill='white'/%3E%3Cpath d='M30 55 Q50 30 70 55' stroke='%23C60C30' stroke-width='6' fill='none'/%3E%3C/svg%3E" />
+<title>Book a Flight | Emirates</title>
+<meta name="description" content="Search, select, and review an Emirates flight booking — a frontend concept flow." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="siteHeader" class="scrolled">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg width="38" height="38" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="45" stroke="#C60C30" stroke-width="3" fill="white"/>
+        <path d="M30 55 Q50 30 70 55" stroke="#C60C30" stroke-width="3" fill="none"/>
+        <path d="M35 50 L50 35 L65 50" stroke="#C60C30" stroke-width="2.5" fill="none"/>
+        <circle cx="50" cy="55" r="4" fill="#C60C30"/>
+      </svg>
+      <span>Emirates</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#fleet">Fleet</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="index.html#skywards">Skywards</a>
+      <a href="booking.html">Book</a>
+    </nav>
+    <a class="nav-cta btn btn-primary" href="booking.html">Book Now</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg id="iconMenu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg id="iconClose" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="wrap">
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#fleet">Fleet</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="index.html#skywards">Skywards</a>
+      <a href="booking.html">Book</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="page-head">
+    <div class="wrap">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a><span class="sep">/</span>
+        <span class="current">Book a flight</span>
+      </p>
+      <h1>Book a flight</h1>
+      <p>A concept booking flow &mdash; select flights, enter passenger details, and review before confirming. No payment is collected.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:56px;">
+    <div class="wrap">
+
+      <div class="steps" id="stepsNav" aria-label="Booking progress">
+        <div class="step active" data-step="1"><span class="step-circle">1</span><span class="step-label">Flights</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="2"><span class="step-circle">2</span><span class="step-label">Passengers</span></div>
+        <div class="step-line"></div>
+        <div class="step" data-step="3"><span class="step-circle">3</span><span class="step-label">Review</span></div>
+      </div>
+
+      <!-- Step 1: Flights -->
+      <div class="step-panel" id="panel1">
+        <div class="summary-bar">
+          <div>
+            <div class="summary-route" id="routeLabel">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-1 .1-1.3.5l-.6.7c-.5.6-.4 1.5.3 1.9L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 2.6 5.3c.4.7 1.3.8 1.9.3l.7-.6c.4-.3.6-.8.5-1.3Z"/></svg>
+              <span id="routeText">Dubai (DXB) &rarr; London (LHR)</span>
+            </div>
+            <div class="summary-meta" id="summaryMeta"></div>
+          </div>
+          <a href="index.html#experience" class="btn btn-secondary btn-small">Edit search</a>
+        </div>
+
+        <div class="flight-group">
+          <h3>Outbound flight</h3>
+          <div id="outboundList"></div>
+        </div>
+        <div class="flight-group" id="returnGroup" hidden>
+          <h3>Return flight</h3>
+          <div id="returnList"></div>
+        </div>
+
+        <div class="step-nav">
+          <span></span>
+          <button type="button" class="btn btn-primary" id="toStep2" disabled>Continue to passengers</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Passengers -->
+      <div class="step-panel" id="panel2" hidden>
+        <div id="paxBlocks"></div>
+        <div class="pax-block">
+          <h4>Contact details</h4>
+          <div class="pax-form two-col">
+            <div class="form-group"><label for="contactEmail">Email</label><input id="contactEmail" type="email" required /></div>
+            <div class="form-group"><label for="contactPhone">Phone</label><input id="contactPhone" type="tel" required /></div>
+          </div>
+        </div>
+        <div class="step-nav">
+          <button type="button" class="btn btn-secondary" id="backTo1">Back</button>
+          <button type="button" class="btn btn-primary" id="toStep3">Continue to review</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Review -->
+      <div class="step-panel" id="panel3" hidden>
+        <dl class="review-card" id="reviewCard"></dl>
+        <div class="step-nav">
+          <button type="button" class="btn btn-secondary" id="backTo2">Back</button>
+          <button type="button" class="btn btn-primary" id="confirmBtn">Confirm booking</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Confirmation -->
+      <div class="step-panel" id="panelConfirm" hidden>
+        <div class="confirm-panel">
+          <div class="confirm-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>Booking confirmed</h2>
+          <p id="confirmRoute"></p>
+          <p id="confirmName"></p>
+          <div class="confirm-code" id="confirmCode"></div>
+          <div class="confirm-actions">
+            <a class="btn btn-primary" href="index.html">Back to home</a>
+            <a class="btn btn-secondary" href="booking.html">Book another flight</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg width="30" height="30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="50" cy="50" r="45" stroke="#C60C30" stroke-width="3" fill="none"/>
+            <path d="M30 55 Q50 30 70 55" stroke="#C60C30" stroke-width="3" fill="none"/>
+          </svg>
+          <span>Emirates</span>
+        </div>
+        <p>Fly Better with the world's most international airline. Connecting people and places across 160+ destinations in 85 countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Plan &amp; Book</h4>
+        <ul><li><a href="booking.html">Search Flights</a></li><li><a href="index.html#destinations">Destinations</a></li><li><a href="index.html#skywards">Emirates Skywards</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>About Us</h4>
+        <ul><li><a href="index.html">Home</a></li><li><a href="index.html#book">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>&copy; 2026 Emirates. All rights reserved. Fly Better.<br /><span style="opacity:.55;font-size:12px;">Unofficial practice/portfolio build &mdash; not affiliated with or endorsed by Emirates.</span></p>
+      <div class="foot-social"></div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js" defer></script>
+<script>
+(function () {
+  "use strict";
+  var params = new URLSearchParams(window.location.search);
+  var from = params.get('from') || 'Dubai (DXB)';
+  var to = params.get('to') || 'London (LHR)';
+  var trip = params.get('trip') || 'round';
+  var depart = params.get('depart') || '';
+  var ret = params.get('ret') || '';
+  var adults = Math.max(1, parseInt(params.get('adults') || '1', 10));
+  var children = Math.max(0, parseInt(params.get('children') || '0', 10));
+  var cabin = params.get('cabin') || 'Economy';
+
+  document.getElementById('routeText').textContent = from + ' \u2192 ' + to;
+  var metaBits = [];
+  metaBits.push('<strong>' + (trip === 'one' ? 'One way' : 'Round trip') + '</strong>');
+  if (depart) metaBits.push('Depart <strong>' + depart + '</strong>');
+  if (trip !== 'one' && ret) metaBits.push('Return <strong>' + ret + '</strong>');
+  var paxTotal = adults + children;
+  metaBits.push('<strong>' + paxTotal + '</strong> passenger' + (paxTotal > 1 ? 's' : ''));
+  metaBits.push('<strong>' + cabin + '</strong>');
+  document.getElementById('summaryMeta').innerHTML = metaBits.map(function (b) { return '<span>' + b + '</span>'; }).join('');
+
+  var BASE_FARES = { Economy: 549, 'Premium Economy': 899, Business: 2899, First: 5899 };
+  var base = BASE_FARES[cabin] || BASE_FARES.Economy;
+
+  var OUTBOUND = [
+    { flight: 'EK001', depart: '08:35', arrive: '12:55+1', dur: '7h 35m', stops: 'Nonstop', aircraft: 'A380', delta: 0 },
+    { flight: 'EK003', depart: '14:15', arrive: '18:35', dur: '7h 35m', stops: 'Nonstop', aircraft: '777-300ER', delta: 40 },
+    { flight: 'EK005', depart: '20:15', arrive: '00:35+1', dur: '7h 35m', stops: 'Nonstop', aircraft: 'A380', delta: -25 }
+  ];
+  var RETURN = [
+    { flight: 'EK002', depart: '14:30', arrive: '00:15+1', dur: '7h 45m', stops: 'Nonstop', aircraft: 'A380', delta: 0 },
+    { flight: 'EK004', depart: '21:50', arrive: '07:35+1', dur: '7h 45m', stops: 'Nonstop', aircraft: '777-300ER', delta: 35 },
+    { flight: 'EK006', depart: '09:10', arrive: '18:55', dur: '7h 45m', stops: 'Nonstop', aircraft: 'A380', delta: -20 }
+  ];
+
+  function fmt(n) { return '$' + n.toLocaleString('en-US'); }
+
+  function renderFlights(list, containerId, groupName) {
+    var container = document.getElementById(containerId);
+    list.forEach(function (f, i) {
+      var price = base + f.delta;
+      var id = groupName + i;
+      var label = document.createElement('label');
+      label.className = 'flight-option';
+      label.setAttribute('for', id);
+      label.innerHTML =
+        '<input type="radio" name="' + groupName + '" id="' + id + '" value="' + i + '" />' +
+        '<div class="flight-option-inner">' +
+          '<div class="flight-times">' +
+            '<div><div class="time">' + f.depart + '</div><div class="flight-meta">' + f.flight + '</div></div>' +
+            '<div class="dur"><span>' + f.dur + '</span><div class="dur-line"></div><span>' + f.stops + '</span></div>' +
+            '<div><div class="time">' + f.arrive + '</div><div class="flight-meta">' + f.aircraft + '</div></div>' +
+          '</div>' +
+          '<div class="flight-price">' + fmt(price) + '<span>per person</span></div>' +
+        '</div>';
+      label.querySelector('input').addEventListener('change', function () {
+        container.querySelectorAll('.flight-option').forEach(function (el) { el.classList.remove('selected'); });
+        label.classList.add('selected');
+        checkStep1Complete();
+      });
+      container.appendChild(label);
+    });
+  }
+
+  renderFlights(OUTBOUND, 'outboundList', 'outbound');
+  var isRoundTrip = trip !== 'one';
+  if (isRoundTrip) {
+    document.getElementById('returnGroup').hidden = false;
+    renderFlights(RETURN, 'returnList', 'return');
+  }
+
+  var toStep2Btn = document.getElementById('toStep2');
+  function checkStep1Complete() {
+    var outOk = document.querySelector('input[name="outbound"]:checked');
+    var retOk = !isRoundTrip || document.querySelector('input[name="return"]:checked');
+    toStep2Btn.disabled = !(outOk && retOk);
+  }
+
+  /* ---- Step navigation ---- */
+  var panels = { 1: document.getElementById('panel1'), 2: document.getElementById('panel2'), 3: document.getElementById('panel3') };
+  var stepEls = document.querySelectorAll('.step');
+  function goToStep(n) {
+    Object.keys(panels).forEach(function (k) { panels[k].hidden = (parseInt(k, 10) !== n); });
+    stepEls.forEach(function (el) {
+      var s = parseInt(el.dataset.step, 10);
+      el.classList.toggle('active', s === n);
+      el.classList.toggle('done', s < n);
+    });
+    window.scrollTo({ top: document.getElementById('stepsNav').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  document.getElementById('toStep2').addEventListener('click', function () {
+    buildPaxForm();
+    goToStep(2);
+  });
+  document.getElementById('backTo1').addEventListener('click', function () { goToStep(1); });
+  document.getElementById('backTo2').addEventListener('click', function () { goToStep(3 - 1); });
+
+  function buildPaxForm() {
+    var wrap = document.getElementById('paxBlocks');
+    if (wrap.dataset.built) return;
+    wrap.dataset.built = '1';
+    for (var i = 0; i < adults; i++) {
+      var block = document.createElement('div');
+      block.className = 'pax-block';
+      block.innerHTML =
+        '<h4>Adult ' + (i + 1) + '</h4>' +
+        '<div class="pax-form two-col">' +
+          '<div class="form-group"><label for="adultFirst' + i + '">First name</label><input id="adultFirst' + i + '" required /></div>' +
+          '<div class="form-group"><label for="adultLast' + i + '">Last name</label><input id="adultLast' + i + '" required /></div>' +
+          '<div class="form-group"><label for="adultSeat' + i + '">Seat preference</label><select id="adultSeat' + i + '"><option>No preference</option><option>Window</option><option>Aisle</option></select></div>' +
+        '</div>';
+      wrap.appendChild(block);
+    }
+    for (var c = 0; c < children; c++) {
+      var cblock = document.createElement('div');
+      cblock.className = 'pax-block';
+      cblock.innerHTML =
+        '<h4>Child ' + (c + 1) + '</h4>' +
+        '<div class="pax-form two-col">' +
+          '<div class="form-group"><label for="childFirst' + c + '">First name</label><input id="childFirst' + c + '" required /></div>' +
+          '<div class="form-group"><label for="childLast' + c + '">Last name</label><input id="childLast' + c + '" required /></div>' +
+        '</div>';
+      wrap.appendChild(cblock);
+    }
+  }
+
+  document.getElementById('toStep3').addEventListener('click', function () {
+    var required = document.querySelectorAll('#panel2 input[required]');
+    var allFilled = true;
+    required.forEach(function (inp) { if (!inp.value.trim()) allFilled = false; });
+    if (!allFilled) {
+      document.getElementById('panel2').querySelectorAll('input').forEach(function (inp) {
+        if (inp.hasAttribute('required') && !inp.value.trim()) inp.reportValidity();
+      });
+      return;
+    }
+    buildReview();
+    goToStep(3);
+  });
+
+  function buildReview() {
+    var outIdx = document.querySelector('input[name="outbound"]:checked').value;
+    var out = OUTBOUND[outIdx];
+    var outPrice = base + out.delta;
+    var retPrice = 0, ret;
+    if (isRoundTrip) {
+      var retIdx = document.querySelector('input[name="return"]:checked').value;
+      ret = RETURN[retIdx];
+      retPrice = base + ret.delta;
+    }
+    var firstName = document.getElementById('adultFirst0') ? document.getElementById('adultFirst0').value : '';
+    var lastName = document.getElementById('adultLast0') ? document.getElementById('adultLast0').value : '';
+    var total = (outPrice + retPrice) * paxTotal;
+
+    var rows = [
+      ['Route', from + ' \u2192 ' + to + (isRoundTrip ? ' (round trip)' : ' (one way)')],
+      ['Outbound', out.flight + ' \u00b7 ' + out.depart + ' \u2192 ' + out.arrive + ' \u00b7 ' + out.aircraft]
+    ];
+    if (isRoundTrip) rows.push(['Return', ret.flight + ' \u00b7 ' + ret.depart + ' \u2192 ' + ret.arrive + ' \u00b7 ' + ret.aircraft]);
+    rows.push(['Class', cabin]);
+    rows.push(['Passengers', paxTotal + ' (' + adults + ' adult' + (adults > 1 ? 's' : '') + (children ? ', ' + children + ' child' + (children > 1 ? 'ren' : '') : '') + ')']);
+    rows.push(['Lead passenger', (firstName || 'Guest') + ' ' + (lastName || '')]);
+
+    var card = document.getElementById('reviewCard');
+    card.innerHTML = '';
+    rows.forEach(function (r) {
+      var div = document.createElement('div');
+      div.className = 'review-row';
+      div.innerHTML = '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>';
+      card.appendChild(div);
+    });
+    var totalDiv = document.createElement('div');
+    totalDiv.className = 'review-row review-total';
+    totalDiv.innerHTML = '<dt>Total</dt><dd>' + fmt(total) + '</dd>';
+    card.appendChild(totalDiv);
+
+    card.dataset.total = total;
+    card.dataset.leadName = (firstName || 'Guest') + ' ' + (lastName || '');
+  }
+
+  document.getElementById('confirmBtn').addEventListener('click', function () {
+    var card = document.getElementById('reviewCard');
+    var code = 'EK' + Math.random().toString(36).slice(2, 7).toUpperCase();
+    document.getElementById('confirmRoute').textContent = from + ' \u2192 ' + to + ' \u00b7 ' + cabin;
+    document.getElementById('confirmName').textContent = 'Booked for ' + card.dataset.leadName;
+    document.getElementById('confirmCode').textContent = code;
+    ['panel1', 'panel2', 'panel3'].forEach(function (id) { document.getElementById(id).hidden = true; });
+    document.getElementById('stepsNav').hidden = true;
+    document.getElementById('panelConfirm').hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  checkStep1Complete();
+})();
+</script>
+</body>
+</html>
