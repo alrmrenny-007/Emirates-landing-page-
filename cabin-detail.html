@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0f1115" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' stroke='%23C60C30' stroke-width='6' fill='white'/%3E%3Cpath d='M30 55 Q50 30 70 55' stroke='%23C60C30' stroke-width='6' fill='none'/%3E%3C/svg%3E" />
+<title id="pageTitle">Cabin | Emirates</title>
+<meta id="metaDesc" name="description" content="Emirates cabin class guide." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header id="siteHeader" class="scrolled">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html">
+      <svg width="38" height="38" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="45" stroke="#C60C30" stroke-width="3" fill="white"/>
+        <path d="M30 55 Q50 30 70 55" stroke="#C60C30" stroke-width="3" fill="none"/>
+        <path d="M35 50 L50 35 L65 50" stroke="#C60C30" stroke-width="2.5" fill="none"/>
+        <circle cx="50" cy="55" r="4" fill="#C60C30"/>
+      </svg>
+      <span>Emirates</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#fleet">Fleet</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="index.html#skywards">Skywards</a>
+      <a href="booking.html">Book</a>
+    </nav>
+    <a class="nav-cta btn btn-primary" href="booking.html">Book Now</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg id="iconMenu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      <svg id="iconClose" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="wrap">
+      <a href="index.html#experience">Experience</a>
+      <a href="index.html#fleet">Fleet</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="index.html#skywards">Skywards</a>
+      <a href="booking.html">Book</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="cabin-hero" id="cabinHero">
+    <div class="wrap">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a><span class="sep">/</span>
+        <a href="index.html#experience">Experience</a><span class="sep">/</span>
+        <span class="current" id="crumbCabin">&hellip;</span>
+      </p>
+      <p class="tagline" id="cabinTagline"></p>
+      <h1 id="cabinName">&hellip;</h1>
+      <p class="lead" id="cabinLead"></p>
+    </div>
+  </section>
+
+  <div class="cabin-facts">
+    <dl class="route-facts wrap" style="padding:28px 0;">
+      <div><dt>Screen</dt><dd id="factScreen">&mdash;</dd></div>
+      <div><dt>Bed / recline</dt><dd id="factBed">&mdash;</dd></div>
+      <div><dt>Seat width</dt><dd id="factWidth">&mdash;</dd></div>
+      <div><dt>Wi-Fi</dt><dd id="factWifi">&mdash;</dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <div class="wrap overview-grid">
+      <div>
+        <h2 style="font-family:'Fraunces',serif;font-size:28px;font-weight:600;margin-bottom:18px;">Onboard</h2>
+        <p id="overviewText"></p>
+        <p style="margin-top:16px;font-size:14px;color:var(--muted);">Available on: <strong id="factAircraft" style="color:var(--text);"></strong></p>
+      </div>
+      <div>
+        <h3 style="font-family:'Fraunces',serif;font-size:19px;font-weight:600;margin-bottom:16px;">What's included</h3>
+        <ul class="feature-grid" id="featureList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="fleet-bg">
+    <div class="wrap">
+      <div class="section-head centered">
+        <h2>Compare cabins</h2>
+        <p>How this class stacks up against the rest of the fleet.</p>
+      </div>
+      <div class="schedule-wrap">
+        <table class="schedule-table" id="compareTable">
+          <thead>
+            <tr><th>Class</th><th>Screen</th><th>Bed / recline</th><th>Seat width</th><th>From</th></tr>
+          </thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cabin-cta" id="ctaBand">
+        <h2 id="ctaHeading">Ready to fly?</h2>
+        <p>Fares are indicative and depend on route and season. Continue to booking to see live options.</p>
+        <a class="btn btn-primary" id="ctaBtn" href="booking.html">Book this cabin</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="offers-bg">
+    <div class="wrap">
+      <div class="section-head centered">
+        <h2>Other cabins</h2>
+        <p>See the full range of onboard experiences.</p>
+      </div>
+      <div class="cabin-grid" id="relatedCabins"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg width="30" height="30" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <circle cx="50" cy="50" r="45" stroke="#C60C30" stroke-width="3" fill="none"/>
+            <path d="M30 55 Q50 30 70 55" stroke="#C60C30" stroke-width="3" fill="none"/>
+          </svg>
+          <span>Emirates</span>
+        </div>
+        <p>Fly Better with the world's most international airline. Connecting people and places across 160+ destinations in 85 countries.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Experience</h4>
+        <ul><li><a href="cabin-detail.html?class=first">First Class</a></li><li><a href="cabin-detail.html?class=business">Business Class</a></li><li><a href="cabin-detail.html?class=premium">Premium Economy</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>Plan &amp; Book</h4>
+        <ul><li><a href="booking.html">Search Flights</a></li><li><a href="index.html#destinations">Destinations</a></li><li><a href="index.html#skywards">Emirates Skywards</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h4>About Us</h4>
+        <ul><li><a href="index.html">Home</a></li><li><a href="index.html#book">Contact</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>&copy; 2026 Emirates. All rights reserved. Fly Better.<br /><span style="opacity:.55;font-size:12px;">Unofficial practice/portfolio build &mdash; not affiliated with or endorsed by Emirates.</span></p>
+      <div class="foot-social"></div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/cabins-data.js"></script>
+<script src="assets/main.js" defer></script>
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('class') || 'first';
+  var data = window.CABINS[slug];
+
+  if (!data) {
+    document.getElementById('main').innerHTML =
+      '<section style="padding:160px 24px 100px;text-align:center;">' +
+      '<h1 style="font-family:\'Fraunces\',serif;font-size:32px;margin-bottom:12px;">Cabin not found</h1>' +
+      '<p style="color:#6b7178;margin-bottom:24px;">We don\'t have a page for that class yet.</p>' +
+      '<a class="btn btn-primary" href="index.html#experience">Back to cabins</a>' +
+      '</section>';
+    return;
+  }
+
+  function fmt(n) { return '$' + n.toLocaleString('en-US'); }
+
+  document.title = data.name + ' | Emirates';
+  document.getElementById('metaDesc').setAttribute('content', data.lead);
+  document.getElementById('cabinHero').classList.add(data.gradientClass);
+  document.getElementById('crumbCabin').textContent = data.name;
+  document.getElementById('cabinTagline').textContent = data.tagline;
+  document.getElementById('cabinName').textContent = data.name;
+  document.getElementById('cabinLead').textContent = data.lead;
+  document.getElementById('factScreen').textContent = data.specs.screen;
+  document.getElementById('factBed').textContent = data.specs.bed;
+  document.getElementById('factWidth').textContent = data.specs.width;
+  document.getElementById('factWifi').textContent = data.specs.wifi;
+  document.getElementById('overviewText').textContent = data.overview;
+  document.getElementById('factAircraft').textContent = data.aircraft;
+
+  var list = document.getElementById('featureList');
+  data.features.forEach(function (f) {
+    var li = document.createElement('li');
+    li.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span></span>';
+    li.querySelector('span').textContent = f;
+    list.appendChild(li);
+  });
+
+  var order = ['first', 'business', 'premium'];
+  var compareBody = document.getElementById('compareBody');
+  order.forEach(function (key) {
+    var c = window.CABINS[key];
+    var tr = document.createElement('tr');
+    if (key === slug) tr.style.background = '#faf3f3';
+    tr.innerHTML = '<td>' + (key === slug ? '<strong>' + c.name + '</strong>' : c.name) + '</td><td>' + c.specs.screen + '</td><td>' + c.specs.bed + '</td><td>' + c.specs.width + '</td><td>' + fmt(c.fareFrom) + '</td>';
+    compareBody.appendChild(tr);
+  });
+
+  var ctaBand = document.getElementById('ctaBand');
+  ctaBand.style.background = data.slug === 'first' ? 'linear-gradient(160deg,rgba(146,110,46,.95),rgba(70,52,18,.98))'
+    : data.slug === 'business' ? 'linear-gradient(160deg,rgba(55,58,64,.95),rgba(24,26,30,.98))'
+    : 'linear-gradient(160deg,rgba(70,84,102,.95),rgba(35,42,52,.98))';
+  document.getElementById('ctaHeading').textContent = 'Ready to fly ' + data.name + '?';
+  document.getElementById('ctaBtn').href = 'booking.html?' + new URLSearchParams({ from: 'Dubai (DXB)', cabin: data.name, trip: 'round', adults: '1', children: '0' }).toString();
+
+  var related = document.getElementById('relatedCabins');
+  order.filter(function (k) { return k !== slug; }).forEach(function (key) {
+    var c = window.CABINS[key];
+    var a = document.createElement('a');
+    a.className = 'cabin-card';
+    a.style.display = 'block';
+    a.href = 'cabin-detail.html?class=' + key;
+    a.innerHTML =
+      '<div class="cabin-top ' + c.gradientClass + '"><div><p>' + c.tagline + '</p><h3>' + c.name + '</h3></div></div>' +
+      '<div class="cabin-body"><p class="desc">' + c.lead + '</p></div>';
+    related.appendChild(a);
+  });
+})();
+</script>
+</body>
+</html>

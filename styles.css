@@ -187,7 +187,7 @@
   /* ---------- Cabins ---------- */
   .cabin-grid{display:grid;gap:24px;grid-template-columns:1fr;}
   @media (min-width:880px){.cabin-grid{grid-template-columns:repeat(3,1fr);}}
-  .cabin-card{border-radius:18px;overflow:hidden;background:#faf9f7;transition:transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);}
+  .cabin-card{display:block;border-radius:18px;overflow:hidden;background:#faf9f7;transition:transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);}
   .cabin-card:hover{transform:translateY(-6px);box-shadow:0 25px 45px -18px rgba(0,0,0,.22);}
   .cabin-top{height:240px;display:flex;align-items:center;justify-content:center;padding:0 28px;text-align:center;}
   .cabin-top p{font-size:13px;font-weight:600;letter-spacing:.02em;margin-bottom:8px;}
@@ -485,3 +485,18 @@
 /* Related destinations heading spacing already covered by .section-head */
 .related-grid{display:grid;gap:20px;grid-template-columns:1fr;}
 @media (min-width:720px){.related-grid{grid-template-columns:repeat(3,1fr);}}
+
+/* ---------- Cabin detail page ---------- */
+.cabin-hero{margin-top:80px;padding:90px 0 64px;color:#fff;}
+.cabin-hero .breadcrumb a, .cabin-hero .breadcrumb .sep{color:rgba(255,255,255,.68);}
+.cabin-hero .breadcrumb .current{color:#fff;}
+.cabin-hero .tagline{font-size:14px;font-weight:600;letter-spacing:.02em;margin:18px 0 6px;opacity:.85;}
+.cabin-hero h1{font-family:"Fraunces",serif;font-size:clamp(34px,5.5vw,58px);font-weight:700;}
+.cabin-hero p.lead{margin-top:16px;max-width:600px;font-size:16px;line-height:1.65;opacity:.92;}
+.cabin-facts{background:#faf9f7;border-bottom:1px solid var(--line);}
+.feature-grid{display:flex;flex-direction:column;gap:14px;}
+.feature-grid li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--text);}
+.feature-grid svg{flex:none;color:var(--red);margin-top:2px;}
+.cabin-cta{border-radius:20px;padding:48px;text-align:center;color:#fff;}
+.cabin-cta h2{font-family:"Fraunces",serif;font-size:clamp(24px,3.5vw,32px);font-weight:600;margin-bottom:12px;}
+.cabin-cta p{opacity:.9;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;}
