@@ -170,4 +170,111 @@
     testiPrev.addEventListener('click', function () { scroller.scrollBy({ left: -360, behavior: 'smooth' }); });
     testiNext.addEventListener('click', function () { scroller.scrollBy({ left: 360, behavior: 'smooth' }); });
   }
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Scroll progress bar (every page) ---------- */
+  var progress = document.createElement('div');
+  progress.className = 'scroll-progress';
+  document.body.appendChild(progress);
+  function updateProgress() {
+    var h = document.documentElement;
+    var scrollTop = h.scrollTop || document.body.scrollTop;
+    var height = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+    var pct = height > 0 ? (scrollTop / height) * 100 : 0;
+    progress.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  /* ---------- Back-to-top button (every page) ---------- */
+  var toTop = document.createElement('button');
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', 'Back to top');
+  toTop.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>';
+  document.body.appendChild(toTop);
+  window.addEventListener('scroll', function () {
+    toTop.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  /* ---------- Reveal-on-scroll for card grids ---------- */
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var revealSelectors = '.cabin-card, .fleet-card, .dest-card, .offer-card, .tier-card, .testi-card, .faq-item, .related-grid > *, .flight-option';
+    var revealEls = $$(revealSelectors);
+    revealEls.forEach(function (el, i) {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (Math.min(i % 6, 5) * 0.06) + 's';
+    });
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  }
+
+  /* ---------- Animated stat counters (homepage) ---------- */
+  var statEls = $$('.stats-grid dt');
+  if (statEls.length && 'IntersectionObserver' in window) {
+    function animateCount(el) {
+      var raw = el.textContent.trim();
+      var match = raw.match(/^([\d.,]+)(.*)$/);
+      if (!match) return;
+      var target = parseFloat(match[1].replace(/,/g, ''));
+      var suffix = match[2];
+      var decimals = (match[1].split('.')[1] || '').length;
+      if (reduceMotion) return;
+      var start = null;
+      var duration = 1200;
+      function step(ts) {
+        if (!start) start = ts;
+        var progressPct = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progressPct, 3);
+        var val = target * eased;
+        el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString('en-US')) + suffix;
+        if (progressPct < 1) requestAnimationFrame(step);
+        else el.textContent = raw;
+      }
+      requestAnimationFrame(step);
+    }
+    var statObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    statEls.forEach(function (el) { statObserver.observe(el); });
+  }
+
+  /* ---------- FAQ smooth open/close (homepage) ---------- */
+  $$('.faq-item').forEach(function (item) {
+    var summary = item.querySelector('summary');
+    var body = item.querySelector('.faq-body');
+    if (!summary || !body) return;
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = item.hasAttribute('open');
+      if (!isOpen) {
+        item.setAttribute('open', '');
+        var h = body.scrollHeight;
+        body.style.maxHeight = '0px';
+        requestAnimationFrame(function () { body.style.maxHeight = h + 'px'; });
+      } else {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        requestAnimationFrame(function () { body.style.maxHeight = '0px'; });
+        body.addEventListener('transitionend', function handler() {
+          item.removeAttribute('open');
+          body.removeEventListener('transitionend', handler);
+        }, { once: true });
+      }
+    });
+  });
 })();

@@ -500,3 +500,79 @@
 .cabin-cta{border-radius:20px;padding:48px;text-align:center;color:#fff;}
 .cabin-cta h2{font-family:"Fraunces",serif;font-size:clamp(24px,3.5vw,32px);font-weight:600;margin-bottom:12px;}
 .cabin-cta p{opacity:.9;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;}
+
+/* ================= Motion & interaction pass ================= */
+
+/* Global tactile press feedback */
+.btn, .chip, .trip-btn, .swap-btn, .stepper button, .testi-arrow, .flight-option{
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:active{transform:translateY(0) scale(.97);}
+
+/* Primary button shine sweep on hover */
+.btn-primary{position:relative;overflow:hidden;}
+.btn-primary::after{
+  content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+  transform:skewX(-20deg);transition:left .6s ease;pointer-events:none;
+}
+.btn-primary:hover::after{left:130%;}
+
+/* Nav link underline grow */
+.nav-links a{position:relative;}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:currentColor;
+  transition:width .25s ease;
+}
+.nav-links a:hover::after{width:100%;}
+
+/* Scroll progress bar */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg, var(--red), var(--gold));
+  z-index:200;transition:width .1s linear;
+}
+
+/* Hero slow Ken Burns zoom */
+.hero video{animation:kenburns 22s ease-in-out infinite alternate;}
+@keyframes kenburns{from{transform:scale(1);}to{transform:scale(1.08);}}
+
+/* Animated stat counters ride on existing markup, no layout change needed */
+.stats-grid dt{transition:color .3s ease;}
+
+/* Reveal-on-scroll (opt-in via .reveal, applied by JS to grids/cards) */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+
+/* Card hover glow refinements */
+.cabin-card:hover{box-shadow:0 25px 45px -18px rgba(200,16,46,.28);}
+.offer-card:hover{box-shadow:0 20px 34px -18px rgba(200,16,46,.22);}
+.fleet-card:hover{box-shadow:0 20px 34px -18px rgba(0,0,0,.12);}
+.tier-card:hover{transform:translateY(-4px);}
+.dest-card{will-change:transform;}
+.dest-card:hover{transform:translateY(-4px);}
+
+/* FAQ animated open/close (JS toggles max-height; CSS eases it) */
+.faq-item .faq-body{overflow:hidden;max-height:0;transition:max-height .3s ease;}
+.faq-item[open] .faq-body{max-height:400px;}
+.faq-item summary .plus::before, .faq-item summary .plus::after{transition:transform .3s ease;}
+.faq-item summary:hover{color:var(--red);}
+
+/* Back to top button */
+.to-top{
+  position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;
+  background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 24px rgba(0,0,0,.25);opacity:0;pointer-events:none;
+  transform:translateY(12px);transition:opacity .3s ease, transform .3s ease, background .2s ease;
+  z-index:150;
+}
+.to-top.visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+.to-top:hover{background:var(--red);}
+
+/* Number-counting elements get tabular nums so digits don't jitter width (already set on stats-grid dt) */
+
+@media (prefers-reduced-motion:reduce){
+  .hero video{animation:none;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .btn-primary::after{display:none;}
+}
